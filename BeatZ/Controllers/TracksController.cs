@@ -1,4 +1,4 @@
-using BeatZ.Models;
+using BeatZ.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeatZ.Controllers

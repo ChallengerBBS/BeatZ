@@ -1,4 +1,4 @@
-﻿namespace BeatZ.Models
+﻿namespace BeatZ.Domain.Entities
 {
     public class Track
     {
