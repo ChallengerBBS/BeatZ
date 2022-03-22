@@ -1,7 +1,7 @@
 using BeatZ.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BeatZ.Controllers
+namespace BeatZ.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
