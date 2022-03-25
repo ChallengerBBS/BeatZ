@@ -3,15 +3,17 @@ using BeatZ.Domain.Entities;
 using BeatZ.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BeatZ.Persistence
 {
-    public  class BeatzDbContext : IdentityDbContext<ApplicationUser>, IBeatzDbContext
+    public class BeatzDbContext : DbContext, IBeatzDbContext
     {
-       public BeatzDbContext(DbContextOptions<BeatzDbContext> options)
-            : base(options)
+        public BeatzDbContext()
+        {
+        }
+
+        public BeatzDbContext(DbContextOptions<BeatzDbContext> options)
+             : base(options)
         {
         }
 

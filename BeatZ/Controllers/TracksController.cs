@@ -1,3 +1,4 @@
+using BeatZ.Application.Common.Interfaces;
 using BeatZ.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,32 +9,45 @@ namespace BeatZ.Api.Controllers
     public class TracksController : ControllerBase
     {
         private readonly ILogger<TracksController> _logger;
+        private readonly IBeatzDbContext dbContext;
 
-        private readonly List<Track> _tracks = new List<Track>();
-
-        private static readonly List<Artist> _artists = new List<Artist> {
-            new Artist() { ArtistId = 1, ArtistName = "Michael Jackson" },
-            new Artist() { ArtistId = 2, ArtistName = "Taylor Swift" },
-            new Artist() { ArtistId = 3, ArtistName = "Britney Spears" },
-            new Artist() { ArtistId = 4, ArtistName = "Beyonce" },
-            new Artist() { ArtistId = 5, ArtistName = "Elton John" },
-
-        };
-
-        public TracksController(ILogger<TracksController> logger)
+        public TracksController(ILogger<TracksController> logger, IBeatzDbContext dbContext)
         {
             _logger = logger;
-            _tracks.Add(new Track() { TrackId = 1, TrackName = "Got to be there", Artists = new List<Artist>() { _artists[0] } });
-            _tracks.Add(new Track() { TrackId = 2, TrackName = "August", Artists = new List<Artist>() { _artists[1] } });
-            _tracks.Add(new Track() { TrackId = 3, TrackName = "Lucky", Artists = new List<Artist>() { _artists[2] } });
-            _tracks.Add(new Track() { TrackId = 4, TrackName = "Halo", Artists = new List<Artist>() { _artists[3] } });
-            _tracks.Add(new Track() { TrackId = 5, TrackName = "Your Song", Artists = new List<Artist>() { _artists[4] } });
+            this.dbContext = dbContext;
         }
 
         [HttpGet]
         public IEnumerable<Track> GetAllTracks()
         {
-            return this._tracks;
+            foreach (var track in this.dbContext.Tracks)
+            {
+                yield return track;
+            }
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Track))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Track> GetTrack(int id)
+        {
+           var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+
+           if (track == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(track);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Track>> CreateTracks(Track track)
+        {
+            this.dbContext.Tracks.Add(track);
+            await dbContext.SaveChangesAsync(new CancellationToken());
+
+            return CreatedAtAction(nameof(GetTrack), new {id = track.TrackId}, track);
         }
     }
 }

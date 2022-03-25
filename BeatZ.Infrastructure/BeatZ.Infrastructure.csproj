@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BeatZ\BeatZ.Api.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\BeatZ.Application\BeatZ.Application.csproj" />
+	</ItemGroup>
 
 </Project>

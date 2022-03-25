@@ -22,10 +22,9 @@
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BeatZ.Application\BeatZ.Application.csproj" />
-    <ProjectReference Include="..\BeatZ.Domain\BeatZ.Domain.csproj" />
-    <ProjectReference Include="..\BeatZ.Infrastructure\BeatZ.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\BeatZ.Application\BeatZ.Application.csproj" />
+		<ProjectReference Include="..\BeatZ.Infrastructure\BeatZ.Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

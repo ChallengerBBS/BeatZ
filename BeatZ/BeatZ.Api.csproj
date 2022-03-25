@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,8 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BeatZ.Domain\BeatZ.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\BeatZ.Application\BeatZ.Application.csproj" />
+		<ProjectReference Include="..\BeatZ.Infrastructure\BeatZ.Infrastructure.csproj" />
+		<ProjectReference Include="..\BeatZ.Persistence\BeatZ.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>

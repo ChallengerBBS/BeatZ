@@ -4,14 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeatZ.Api", "BeatZ\BeatZ.Api.csproj", "{F81E4152-B460-4A5E-BE49-683E02B89273}"
+	ProjectSection(ProjectDependencies) = postProject
+		{88E12AE3-F955-4221-8CD3-F7C445E4CF79} = {88E12AE3-F955-4221-8CD3-F7C445E4CF79}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeatZ.Infrastructure", "BeatZ.Infrastructure\BeatZ.Infrastructure.csproj", "{A697090D-1AC3-44E2-805F-9A39C9BD6D54}"
+	ProjectSection(ProjectDependencies) = postProject
+		{88E12AE3-F955-4221-8CD3-F7C445E4CF79} = {88E12AE3-F955-4221-8CD3-F7C445E4CF79}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeatZ.Persistence", "Beatz.Persistence\BeatZ.Persistence.csproj", "{B8D7585E-E6E2-4DFA-B0E7-CD1CCE7FE672}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A697090D-1AC3-44E2-805F-9A39C9BD6D54} = {A697090D-1AC3-44E2-805F-9A39C9BD6D54}
+		{88E12AE3-F955-4221-8CD3-F7C445E4CF79} = {88E12AE3-F955-4221-8CD3-F7C445E4CF79}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeatZ.Domain", "BeatZ.Domain\BeatZ.Domain.csproj", "{656545A2-9CAB-46B8-9DF1-F8B5BA0BE6AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatZ.Application", "BeatZ.Application\BeatZ.Application.csproj", "{88E12AE3-F955-4221-8CD3-F7C445E4CF79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeatZ.Application", "BeatZ.Application\BeatZ.Application.csproj", "{88E12AE3-F955-4221-8CD3-F7C445E4CF79}"
+	ProjectSection(ProjectDependencies) = postProject
+		{656545A2-9CAB-46B8-9DF1-F8B5BA0BE6AC} = {656545A2-9CAB-46B8-9DF1-F8B5BA0BE6AC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
