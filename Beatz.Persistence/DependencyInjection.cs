@@ -14,8 +14,7 @@ namespace BeatZ.Persistence
                 .AddDbContextCheck<BeatzDbContext>(name: "Application Database");
 
             services.AddDbContext<BeatzDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("BeatZConnection"),
-            //b => b.MigrationsAssembly(typeof(BeatzDbContext).Assembly.FullName))            
+                options.UseSqlServer(configuration.GetConnectionString("BeatZConnection"),   
             b => b.MigrationsAssembly("BeatZ.Api"))
                 .LogTo(Console.WriteLine, LogLevel.Information)); // disable for production;
 

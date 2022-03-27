@@ -20,5 +20,12 @@ namespace BeatZ.Persistence
         public DbSet<Album> Albums { get; set; } = null!;
         public DbSet<Artist> Artists { get; set; } = null!;
         public DbSet<Track> Tracks { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Track>()
+                 .HasMany(t => t.Artists)
+                 .WithOne(a => a.Track);
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BeatZ.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeatZ.Domain.Entities
 {
     public class Album
     {
@@ -7,6 +9,8 @@
             this.AlbumName = "";
             this.Tracks = new List<Track>();
         }
+
+        [Key]
         public int AlbumId { get; set; }
 
         public string AlbumName { get; set; }
