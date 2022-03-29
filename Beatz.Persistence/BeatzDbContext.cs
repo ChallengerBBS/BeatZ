@@ -23,7 +23,7 @@ namespace BeatZ.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            _ = modelBuilder.Entity<Track>()
+            modelBuilder.Entity<Track>()
                  .HasMany(t => t.Artists)
                  .WithOne(a => a.Track);
         }
