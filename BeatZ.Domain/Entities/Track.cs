@@ -18,6 +18,6 @@ namespace BeatZ.Domain.Entities
         public string TrackName { get; set; }
 
         [MustHaveAtleastOneElement(ErrorMessage ="There should be alteast one track artist specified!")]
-        public ICollection<Artist> Artists { get; set; }
+        public List<Artist> Artists { get; set; }
     }
 }
