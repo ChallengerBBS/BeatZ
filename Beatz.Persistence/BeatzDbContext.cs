@@ -21,11 +21,15 @@ namespace BeatZ.Persistence
         public DbSet<Artist> Artists { get; set; } = null!;
         public DbSet<Track> Tracks { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Track>()
-                 .HasMany(t => t.Artists)
-                 .WithOne(a => a.Track);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Track>()
+        //         .HasMany(t => t.Artists)
+        //         .WithMany(a => a.Tracks);
+
+        //    modelBuilder.Entity<Album>()
+        //        .HasMany(a => a.Tracks)
+        //        .WithOne(t => t.Album);
+        //}
     }
 }

@@ -31,9 +31,9 @@ namespace BeatZ.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Track> GetTrack(int id)
         {
-           var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
 
-           if (track == null)
+            if (track == null)
             {
                 return NotFound();
             }
@@ -47,7 +47,21 @@ namespace BeatZ.Api.Controllers
             this.dbContext.Tracks.Add(track);
             await dbContext.SaveChangesAsync(new CancellationToken());
 
-            return CreatedAtAction(nameof(GetTrack), new {id = track.TrackId}, track);
+            return CreatedAtAction(nameof(GetTrack), new { id = track.TrackId }, track);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteTracks(int id)
+        {
+            var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            if (track != null)
+            {
+                this.dbContext.Tracks.Remove(track);
+                await dbContext.SaveChangesAsync(new CancellationToken());
+                return Accepted();
+            }
+
+            return NoContent();
         }
     }
 }

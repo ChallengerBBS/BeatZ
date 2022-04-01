@@ -18,11 +18,11 @@ namespace BeatZ.Persistence.Repositories
 
         private void FeedMockTracks(List<Artist> _artists)
         {
-            this._tracks.Add(new Track() { TrackId = 1, TrackName = "Got to be there", Artists = new List<Artist>() { _artists[0] } });
-            this._tracks.Add(new Track() { TrackId = 2, TrackName = "August", Artists = new List<Artist>() { _artists[1] } });
-            this._tracks.Add(new Track() { TrackId = 3, TrackName = "Lucky", Artists = new List<Artist>() { _artists[2] } });
-            this._tracks.Add(new Track() { TrackId = 4, TrackName = "Halo", Artists = new List<Artist>() { _artists[3] } });
-            this._tracks.Add(new Track() { TrackId = 5, TrackName = "Your Song", Artists = new List<Artist>() { _artists[4] } });
+            //this._tracks.Add(new Track() { TrackId = 1, TrackName = "Got to be there", Artists = new List<Artist>() { _artists[0] } });
+            //this._tracks.Add(new Track() { TrackId = 2, TrackName = "August", Artists = new List<Artist>() { _artists[1] } });
+            //this._tracks.Add(new Track() { TrackId = 3, TrackName = "Lucky", Artists = new List<Artist>() { _artists[2] } });
+            //this._tracks.Add(new Track() { TrackId = 4, TrackName = "Halo", Artists = new List<Artist>() { _artists[3] } });
+            //this._tracks.Add(new Track() { TrackId = 5, TrackName = "Your Song", Artists = new List<Artist>() { _artists[4] } });
         }
 
         private void FeedMockArtists()
