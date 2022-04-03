@@ -27,8 +27,6 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Track))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Track> GetTrack(int id)
         {
             var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
@@ -42,7 +40,7 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Track>> CreateTracks(Track track)
+        public async Task<ActionResult<Track>> CreateTrack(Track track)
         {
             this.dbContext.Tracks.Add(track);
             await dbContext.SaveChangesAsync(new CancellationToken());
@@ -51,7 +49,7 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTracks(int id)
+        public async Task<ActionResult> DeleteTrack(int id)
         {
             var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
             if (track != null)

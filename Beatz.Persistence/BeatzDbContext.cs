@@ -1,7 +1,5 @@
 ﻿using BeatZ.Application.Common.Interfaces;
 using BeatZ.Domain.Entities;
-using BeatZ.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeatZ.Persistence
@@ -20,16 +18,5 @@ namespace BeatZ.Persistence
         public DbSet<Album> Albums { get; set; } = null!;
         public DbSet<Artist> Artists { get; set; } = null!;
         public DbSet<Track> Tracks { get; set; } = null!;
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Track>()
-        //         .HasMany(t => t.Artists)
-        //         .WithMany(a => a.Tracks);
-
-        //    modelBuilder.Entity<Album>()
-        //        .HasMany(a => a.Tracks)
-        //        .WithOne(t => t.Album);
-        //}
     }
 }
