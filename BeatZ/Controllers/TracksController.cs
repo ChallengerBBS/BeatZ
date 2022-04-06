@@ -40,7 +40,7 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Track>> CreateTrack(Track track)
+        public async Task<ActionResult<Track>> AddTrack(Track track)
         {
             this.dbContext.Tracks.Add(track);
             await dbContext.SaveChangesAsync(new CancellationToken());

@@ -5,13 +5,13 @@
         public Album()
         {
             this.AlbumName = "";
-            this.Tracks = new List<Track>();
+            this.Tracks = new HashSet<Track>();
         }
 
         public int AlbumId { get; set; }
 
         public string AlbumName { get; set; }
 
-        public List<Track> Tracks { get; set; }
+        public ICollection<Track> Tracks { get; set; }
     }
 }

@@ -4,40 +4,49 @@
 
 namespace BeatZ.Api.Migrations
 {
-    public partial class AddConfigurations : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Tracks_Albums_AlbumId",
-                table: "Tracks");
+            migrationBuilder.CreateTable(
+                name: "Albums",
+                columns: table => new
+                {
+                    AlbumId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlbumName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Albums", x => x.AlbumId);
+                });
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Tracks_Artists_ArtistId",
-                table: "Tracks");
+            migrationBuilder.CreateTable(
+                name: "Artists",
+                columns: table => new
+                {
+                    ArtistId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ArtistName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artists", x => x.ArtistId);
+                });
 
-            migrationBuilder.DropIndex(
-                name: "IX_Tracks_AlbumId",
-                table: "Tracks");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Tracks_ArtistId",
-                table: "Tracks");
-
-            migrationBuilder.DropColumn(
-                name: "AlbumId",
-                table: "Tracks");
-
-            migrationBuilder.DropColumn(
-                name: "ArtistId",
-                table: "Tracks");
-
-            migrationBuilder.AddColumn<string>(
-                name: "FilePath",
-                table: "Tracks",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.CreateTable(
+                name: "Tracks",
+                columns: table => new
+                {
+                    TrackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrackName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tracks", x => x.TrackId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "AlbumTrack",
@@ -106,45 +115,14 @@ namespace BeatZ.Api.Migrations
             migrationBuilder.DropTable(
                 name: "ArtistTrack");
 
-            migrationBuilder.DropColumn(
-                name: "FilePath",
-                table: "Tracks");
+            migrationBuilder.DropTable(
+                name: "Albums");
 
-            migrationBuilder.AddColumn<int>(
-                name: "AlbumId",
-                table: "Tracks",
-                type: "int",
-                nullable: true);
+            migrationBuilder.DropTable(
+                name: "Artists");
 
-            migrationBuilder.AddColumn<int>(
-                name: "ArtistId",
-                table: "Tracks",
-                type: "int",
-                nullable: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tracks_AlbumId",
-                table: "Tracks",
-                column: "AlbumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tracks_ArtistId",
-                table: "Tracks",
-                column: "ArtistId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Tracks_Albums_AlbumId",
-                table: "Tracks",
-                column: "AlbumId",
-                principalTable: "Albums",
-                principalColumn: "AlbumId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Tracks_Artists_ArtistId",
-                table: "Tracks",
-                column: "ArtistId",
-                principalTable: "Artists",
-                principalColumn: "ArtistId");
+            migrationBuilder.DropTable(
+                name: "Tracks");
         }
     }
 }

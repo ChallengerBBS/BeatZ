@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeatZ.Api.Migrations
 {
     [DbContext(typeof(BeatzDbContext))]
-    [Migration("20220403163257_AddConfigurations")]
-    partial class AddConfigurations
+    [Migration("20220406191242_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

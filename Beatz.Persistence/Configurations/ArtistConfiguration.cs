@@ -17,9 +17,6 @@ namespace BeatZ.Persistence.Configurations
 
             builder.Property(b => b.ArtistName)
                 .IsRequired();
-
-            builder.HasMany(a => a.Tracks)
-                .WithMany(t => t.Artists);
         }
     }
 }
