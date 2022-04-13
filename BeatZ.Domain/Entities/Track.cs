@@ -1,4 +1,6 @@
-﻿namespace BeatZ.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeatZ.Domain.Entities
 {
     public class Track
     {
@@ -12,8 +14,12 @@
 
         public int TrackId { get; set; }
 
+        [Required]
+        [MaxLength(50)]
         public string TrackName { get; set; }
 
+        [Required]
+        [MaxLength(250)]
         public string FilePath { get; set; }
 
         public virtual ICollection<Album> Albums { get; set; }

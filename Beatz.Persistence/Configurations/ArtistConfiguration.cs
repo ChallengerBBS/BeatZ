@@ -14,9 +14,6 @@ namespace BeatZ.Persistence.Configurations
             }
 
             builder.ToTable("Artists");
-
-            builder.Property(b => b.ArtistName)
-                .IsRequired();
         }
     }
 }

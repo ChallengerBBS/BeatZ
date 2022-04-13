@@ -14,7 +14,7 @@ namespace BeatZ.Api.Migrations
                 {
                     AlbumId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AlbumName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AlbumName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +27,7 @@ namespace BeatZ.Api.Migrations
                 {
                     ArtistId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ArtistName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ArtistName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,8 +40,8 @@ namespace BeatZ.Api.Migrations
                 {
                     TrackId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TrackName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TrackName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {

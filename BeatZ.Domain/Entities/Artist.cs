@@ -1,4 +1,6 @@
-﻿namespace BeatZ.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeatZ.Domain.Entities;
 
 public class Artist
 {
@@ -10,6 +12,8 @@ public class Artist
 
     public int ArtistId { get; set; }
 
+    [Required]
+    [MaxLength(50)]
     public string ArtistName { get; set; }
 
     public virtual ICollection<Track> Tracks { get; set; } 

@@ -15,9 +15,6 @@ namespace BeatZ.Persistence.Configurations
 
             builder.ToTable("Tracks");
 
-            builder.Property(b => b.TrackName)
-                .IsRequired();
-
             builder.HasMany(t => t.Artists)
                 .WithMany(a => a.Tracks);
         }
