@@ -42,7 +42,18 @@ namespace BeatZ.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Track>> AddTrack(Track track)
         {
-            this.dbContext.Tracks.Add(track);
+            var trackToAdd = new Track();
+            foreach (var currentArtist in track.Artists)
+            {
+                var artist = this.dbContext.Artists.Where(x => x.ArtistId == currentArtist.ArtistId).FirstOrDefault();
+                if (artist == null || (artist.ArtistName != currentArtist.ArtistName))
+                {
+                    continue;
+                }
+                trackToAdd.Artists.Add(artist);
+            }
+
+            this.dbContext.Tracks.Add(trackToAdd);
             await dbContext.SaveChangesAsync(new CancellationToken());
 
             return CreatedAtAction(nameof(GetTrack), new { id = track.TrackId }, track);
