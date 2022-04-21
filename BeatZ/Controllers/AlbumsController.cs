@@ -42,10 +42,33 @@ namespace BeatZ.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Album>> AddAlbum(Album album)
         {
-            this.dbContext.Albums.Add(album);
+            if (album == null)
+            {
+                return BadRequest();
+            }
+
+            if (string.IsNullOrEmpty(album.AlbumName))
+            {
+                return BadRequest("Album name should be in range from 1 to 50 characters!");
+            }
+            var albumToAdd = new Album() { AlbumName = album.AlbumName };
+
+            foreach (var currentTrack in album.Tracks)
+            {
+                var track = this.dbContext.Tracks.Where(x => x.TrackId == currentTrack.TrackId).FirstOrDefault();
+                if (track == null || (track.TrackName != currentTrack.TrackName))
+                {
+                    return BadRequest("Some of the provided tracks are not found!");
+                }
+
+                albumToAdd.Tracks.Add(track);
+            }
+
+
+            this.dbContext.Albums.Add(albumToAdd);
             await dbContext.SaveChangesAsync(new CancellationToken());
 
-            return CreatedAtAction(nameof(GetAlbum), new { id = album.AlbumId }, album);
+            return CreatedAtAction(nameof(GetAlbum), new { id = albumToAdd.AlbumId }, albumToAdd);
         }
 
         [HttpDelete("{id}")]
