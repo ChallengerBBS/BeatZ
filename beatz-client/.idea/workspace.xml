@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12d7375d-537f-453d-8d7b-cc7689b66f87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tracks/Player.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BeatZ.Domain/BeatZ.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ.Domain/BeatZ.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BeatZ/BeatZ.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/BeatZ.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BeatZ/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tracks/TracksList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tracks/TracksList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +58,8 @@
       <option name="presentableId" value="Default" />
       <updated>1651086493900</updated>
       <workItem from="1651086499098" duration="4340000" />
+      <workItem from="1651434666307" duration="949000" />
+      <workItem from="1651479634006" duration="2940000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,6 @@
+using AutoMapper;
 using BeatZ.Application.Common.Interfaces;
+using BeatZ.Domain.Dtos;
 using BeatZ.Domain.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +12,14 @@ namespace BeatZ.Api.Controllers
     public class TracksController : ControllerBase
     {
         private readonly ILogger<TracksController> _logger;
-        private readonly IBeatzDbContext dbContext;
+        private readonly IBeatzDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public TracksController(ILogger<TracksController> logger, IBeatzDbContext dbContext)
+        public TracksController(ILogger<TracksController> logger, IBeatzDbContext dbContext, IMapper mapper)
         {
             _logger = logger;
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
+            this._mapper = mapper;
         }
 
         [HttpPost]
@@ -34,7 +38,7 @@ namespace BeatZ.Api.Controllers
 
             foreach (var currentArtist in track.Artists)
             {
-                var artist = this.dbContext.Artists.Where(x => x.ArtistId == currentArtist.ArtistId).FirstOrDefault();
+                var artist = this._dbContext.Artists.Where(x => x.ArtistId == currentArtist.ArtistId).FirstOrDefault();
                 if (artist == null || (artist.ArtistName != currentArtist.ArtistName))
                 {
                     return BadRequest();
@@ -42,8 +46,8 @@ namespace BeatZ.Api.Controllers
             }
             trackToAdd.Artists.ToList().AddRange(track.Artists);
 
-            this.dbContext.Tracks.Add(trackToAdd);
-            await dbContext.SaveChangesAsync(new CancellationToken());
+            this._dbContext.Tracks.Add(trackToAdd);
+            await _dbContext.SaveChangesAsync(new CancellationToken());
 
             if (trackToAdd.TrackId > 0)
             {
@@ -54,18 +58,27 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Track> GetAllTracks()
+        public IEnumerable<TrackListDto> GetAllTracks()
         {
-            foreach (var track in this.dbContext.Tracks)
+            foreach (var track in this._dbContext.Tracks)
             {
-                yield return track;
+                var dto = _mapper.Map<TrackListDto>(track);
+
+                var artists = this._dbContext.Tracks
+                    .Where(c => c.TrackId == track.TrackId)
+                    .SelectMany(c => c.Artists)
+                    .Select(c => c.ArtistName);
+
+                dto.Artists.AddRange(artists);
+
+                yield return dto;
             }
         }
 
         [HttpGet("{id:int}")]
         public ActionResult<Track> GetTrack(int id)
         {
-            var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
 
             if (track == null)
             {
@@ -78,7 +91,7 @@ namespace BeatZ.Api.Controllers
         [HttpPatch("{id:int}")]
         public async Task<ActionResult> EditTrack(int id, [FromBody] JsonPatchDocument<Track> patchEntity)
         {
-            var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
             if (track == null)
             {
                 return NotFound();
@@ -86,18 +99,18 @@ namespace BeatZ.Api.Controllers
 
             patchEntity.ApplyTo(track, ModelState);
 
-            await dbContext.SaveChangesAsync(new CancellationToken());
+            await _dbContext.SaveChangesAsync(new CancellationToken());
             return Accepted();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTrack(int id)
         {
-            var track = this.dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
             if (track != null)
             {
-                this.dbContext.Tracks.Remove(track);
-                await dbContext.SaveChangesAsync(new CancellationToken());
+                this._dbContext.Tracks.Remove(track);
+                await _dbContext.SaveChangesAsync(new CancellationToken());
                 return Accepted();
             }
 

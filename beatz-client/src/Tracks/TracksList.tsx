@@ -16,7 +16,19 @@ function TrackList() {
     return (
         <Fragment>
             <Button className="btn btn-primary" type="button" onClick={() => getTracks(setSongs)}>Load Tracks</Button>
-            {songs && songs.map((track) => <Card>{track.trackName}</Card>)}
+            {songs && songs.map((track) =>
+                <Card key={track.trackId}>
+                    <div>
+                        Track id: {track.trackId}
+                    </div>
+                    <div>
+                        Track name: {track.trackName}
+                    </div>
+                    <div>
+                        Artists: {track.artists.join(", ")}
+                    </div>
+                </Card>
+            )}
         </Fragment>
     );
 }
