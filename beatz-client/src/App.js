@@ -1,5 +1,5 @@
 import './App.css';
-import TrackList from './Tracks/TracksList.tsx';
+import TrackList from './Tracks/TracksList.jsx';
 
 function App() {
   return (

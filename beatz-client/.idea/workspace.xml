@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12d7375d-537f-453d-8d7b-cc7689b66f87" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BeatZ.Domain/BeatZ.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ.Domain/BeatZ.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ/BeatZ.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/BeatZ.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tracks/TrackPlayer.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/Tracks/tracksSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BeatZ.Domain/Entities/ArtistTrack.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tracks/TracksList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tracks/TracksList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tracks/Player.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/dto.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tracks/TracksList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tracks/TracksList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +30,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Tracks/TracksList.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Tracks/TracksList.jsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -60,6 +65,7 @@
       <workItem from="1651086499098" duration="4340000" />
       <workItem from="1651434666307" duration="949000" />
       <workItem from="1651479634006" duration="2940000" />
+      <workItem from="1651685076365" duration="6701000" />
     </task>
     <servers />
   </component>
