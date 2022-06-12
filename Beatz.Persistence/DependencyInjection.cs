@@ -1,4 +1,5 @@
 ﻿using BeatZ.Application.Common.Interfaces;
+using BeatZ.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,11 @@ namespace BeatZ.Persistence
 
             services.AddScoped<IBeatzDbContext>(provider =>
                 provider.GetService<BeatzDbContext>());
+        }
+
+        public static void AddServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<ITrackService, TracksService>();
         }
     }
 }

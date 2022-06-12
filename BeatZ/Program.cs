@@ -1,3 +1,4 @@
+using BeatZ.Api.Middlewares;
 using BeatZ.Application.Common.Interfaces;
 using BeatZ.Application.Common.Profiles;
 using BeatZ.Persistence;
@@ -17,6 +18,7 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddServices(builder.Configuration);
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddAutoMapper(typeof(TrackProfile));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -38,6 +40,10 @@ app.UseCors("CORSPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<TrackStreamMiddleware>();
+
+app.UseMiddleware<NotFoundMiddleware>();
 
 app.MapControllers();
 

@@ -11,14 +11,12 @@ namespace BeatZ.Api.Controllers
     [Route("api/[controller]")]
     public class TracksController : ControllerBase
     {
-        private readonly ILogger<TracksController> _logger;
-        private readonly IBeatzDbContext _dbContext;
+        private readonly ITrackService _trackService;
         private readonly IMapper _mapper;
 
-        public TracksController(ILogger<TracksController> logger, IBeatzDbContext dbContext, IMapper mapper)
+        public TracksController(ITrackService trackService, IMapper mapper)
         {
-            _logger = logger;
-            this._dbContext = dbContext;
+            this._trackService = trackService;
             this._mapper = mapper;
         }
 
@@ -30,55 +28,39 @@ namespace BeatZ.Api.Controllers
                 string.IsNullOrEmpty(track.FilePath))
                 return BadRequest("Invalid input data!");
 
-            var trackToAdd = new Track()
-            {
-                TrackName = track.TrackName,
-                FilePath = track.FilePath
-            };
+            var trackId = await this._trackService.AddTrackAsync(track);
 
-            foreach (var currentArtist in track.Artists)
+            if (trackId == 0)
             {
-                var artist = this._dbContext.Artists.Where(x => x.ArtistId == currentArtist.ArtistId).FirstOrDefault();
-                if (artist == null || (artist.ArtistName != currentArtist.ArtistName))
-                {
-                    return BadRequest();
-                }
-            }
-            trackToAdd.Artists.ToList().AddRange(track.Artists);
-
-            this._dbContext.Tracks.Add(trackToAdd);
-            await _dbContext.SaveChangesAsync(new CancellationToken());
-
-            if (trackToAdd.TrackId > 0)
-            {
-                this._logger.LogInformation($"Insert new track: {trackToAdd}");
+                return BadRequest();
             }
 
-            return CreatedAtAction(nameof(GetTrack), new { id = trackToAdd.TrackId }, trackToAdd);
+
+            return CreatedAtAction(nameof(GetTrack), new { id = trackId });
         }
 
         [HttpGet]
         public IEnumerable<TrackListDto> GetAllTracks()
         {
-            foreach (var track in this._dbContext.Tracks)
+            var allTracks = this._trackService.GetAllTracks(p => true);
+
+
+            foreach (var track in allTracks)
             {
                 var dto = _mapper.Map<TrackListDto>(track);
 
-                var artists = this._dbContext.Tracks
-                    .Where(c => c.TrackId == track.TrackId)
-                    .SelectMany(c => c.Artists)
-                    .Select(c => c.ArtistName);
+                var artistsNames = this._trackService.GetTrackArtistsNames(track.TrackId);
 
-                dto.Artists.AddRange(artists);
+                dto.Artists.AddRange(artistsNames);
 
                 yield return dto;
             }
         }
 
-        [HttpGet("{id:int}")]
-        public ActionResult<Track> GetTrack(int id)
+        [HttpGet("{trackId:int}")]
+        public ActionResult<Track> GetTrack(int trackId)
         {
-            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this._trackService.GetTrack(p => p.TrackId == trackId);
 
             if (track == null)
             {
@@ -88,10 +70,24 @@ namespace BeatZ.Api.Controllers
             return Ok(track);
         }
 
+        //[HttpGet("{trackId:int}/play")]
+        //public FileContentResult PlaySong(int trackId)
+        //{
+        //    var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == trackId);
+
+        //    if (track != null && !string.IsNullOrWhiteSpace(track.FilePath))
+        //    {
+        //        return File(System.IO.File.ReadAllBytes(track.FilePath), "audio/mpeg", Path.GetFileName(track.FilePath));
+        //    }
+
+        //    return new FileContentResult(new byte[0], "audio/mpeg");
+        //}
+
+
         [HttpPatch("{id:int}")]
         public async Task<ActionResult> EditTrack(int id, [FromBody] JsonPatchDocument<Track> patchEntity)
         {
-            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this._trackService.GetTrack(p => p.TrackId == id);
             if (track == null)
             {
                 return NotFound();
@@ -99,18 +95,23 @@ namespace BeatZ.Api.Controllers
 
             patchEntity.ApplyTo(track, ModelState);
 
-            await _dbContext.SaveChangesAsync(new CancellationToken());
+            var trackId = await this._trackService.AddTrackAsync(track);
+
+            if (trackId == 0)
+            {
+                return BadRequest();
+            }
+
             return Accepted();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTrack(int id)
         {
-            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
+            var track = this._trackService.GetTrack(p => p.TrackId == id);
             if (track != null)
             {
-                this._dbContext.Tracks.Remove(track);
-                await _dbContext.SaveChangesAsync(new CancellationToken());
+                await this._trackService.DeleteTrack(track.TrackId);
                 return Accepted();
             }
 
