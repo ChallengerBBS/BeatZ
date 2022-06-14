@@ -26,6 +26,7 @@ namespace BeatZ.Persistence
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ITrackService, TracksService>();
+            services.AddScoped<IArtistService, ArtistsService>();
         }
     }
 }

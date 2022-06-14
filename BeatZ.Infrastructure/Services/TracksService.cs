@@ -10,7 +10,7 @@ namespace BeatZ.Infrastructure.Services
         private readonly IBeatzDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public TracksService(IBeatzDbContext dbContext, ILogger logger)
+        public TracksService(IBeatzDbContext dbContext, ILogger<TracksService> logger)
         {
             this._dbContext = dbContext;
             this._logger = logger;
@@ -57,6 +57,16 @@ namespace BeatZ.Infrastructure.Services
             return trackToAdd.TrackId;
         }
 
+        public IEnumerable<Track> GetAllTracks(Expression<Func<Track, bool>> predicate)
+        {
+            return this._dbContext.Tracks.Where(predicate);
+        }
+
+        public Track GetTrack(Expression<Func<Track, bool>> predicate)
+        {
+            return this._dbContext.Tracks.FirstOrDefault(predicate);
+        }
+
         public async Task DeleteTrack(int id)
         {
             var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == id);
@@ -65,18 +75,6 @@ namespace BeatZ.Infrastructure.Services
                 this._dbContext.Tracks.Remove(track);
                 await _dbContext.SaveChangesAsync(new CancellationToken());
             }
-        }
-
-        public IEnumerable<Track> GetAllTracks(Expression<Func<Track, bool>> predicate)
-        {
-            return this._dbContext.Tracks.Where(predicate);
-        }
-
-
-
-        public Track GetTrack(Expression<Func<Track, bool>> predicate)
-        {
-            return this._dbContext.Tracks.FirstOrDefault(predicate);
         }
 
         public IEnumerable<string> GetTrackArtistsNames(int trackId)

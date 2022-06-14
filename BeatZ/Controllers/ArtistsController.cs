@@ -10,27 +10,24 @@ namespace BeatZ.Api.Controllers
     public class ArtistsController : ControllerBase
     {
         private readonly ILogger<ArtistsController> logger;
-        private readonly IBeatzDbContext dbContext;
+        private readonly IArtistService _artistService;
 
-        public ArtistsController(ILogger<ArtistsController> logger, IBeatzDbContext dbContext)
+        public ArtistsController(ILogger<ArtistsController> logger, IArtistService artistService)
         {
             this.logger = logger;
-            this.dbContext = dbContext;
+            this._artistService = artistService;
         }
 
         [HttpGet]
         public IEnumerable<Artist> GetAllArtists()
         {
-            foreach (var artist in this.dbContext.Artists)
-            {
-                yield return artist;
-            }
+            return this._artistService.GetAllArtists(p=>true);
         }
 
         [HttpGet("{id}")]
         public ActionResult<Artist> GetArtist(int id)
         {
-            var artist = this.dbContext.Artists.FirstOrDefault(p => p.ArtistId == id);
+            var artist = this._artistService.GetArtist(p => p.ArtistId == id);
 
             if (artist == null)
             {
@@ -41,7 +38,7 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Artist>> AddArtist(Artist artist)
+        public async Task<ActionResult<Artist>> AddArtistAsync(Artist artist)
         {
             if (artist == null)
             {
@@ -53,8 +50,7 @@ namespace BeatZ.Api.Controllers
                 return BadRequest("Artist name should be in range from 1 to 50 characters!");
             }
 
-            this.dbContext.Artists.Add(artist);
-            await dbContext.SaveChangesAsync(new CancellationToken());
+            await this._artistService.AddArtistAsync(artist);
 
             return CreatedAtAction(nameof(GetArtist), new { id = artist.ArtistId }, artist);
         }
@@ -62,7 +58,7 @@ namespace BeatZ.Api.Controllers
         [HttpPatch("{id:int}")]
         public async Task<ActionResult> EditArtist(int id, [FromBody] JsonPatchDocument<Artist> patchEntity)
         {
-            var artist = this.dbContext.Artists.FirstOrDefault(p => p.ArtistId == id);
+            var artist = this._artistService.GetArtist(p => p.ArtistId == id);
             if (artist == null)
             {
                 return NotFound();
@@ -70,18 +66,23 @@ namespace BeatZ.Api.Controllers
 
             patchEntity.ApplyTo(artist, ModelState);
 
-            await dbContext.SaveChangesAsync(new CancellationToken());
+            var artistId = await this._artistService.AddArtistAsync(artist);
+
+            if (artistId == 0)
+            {
+                return BadRequest();
+            }
+
             return Accepted();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteArtist(int id)
         {
-            var artist = this.dbContext.Artists.FirstOrDefault(p => p.ArtistId == id);
+            var artist = this._artistService.GetArtist(p => p.ArtistId == id);
             if (artist != null)
             {
-                this.dbContext.Artists.Remove(artist);
-                await dbContext.SaveChangesAsync(new CancellationToken());
+                await this._artistService.DeleteArtist(artist.ArtistId);
                 return Accepted();
             }
 
