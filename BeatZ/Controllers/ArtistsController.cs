@@ -9,12 +9,10 @@ namespace BeatZ.Api.Controllers
     [Route("api/[controller]")]
     public class ArtistsController : ControllerBase
     {
-        private readonly ILogger<ArtistsController> logger;
         private readonly IArtistService _artistService;
 
-        public ArtistsController(ILogger<ArtistsController> logger, IArtistService artistService)
+        public ArtistsController(IArtistService artistService)
         {
-            this.logger = logger;
             this._artistService = artistService;
         }
 

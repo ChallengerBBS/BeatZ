@@ -1,16 +1,21 @@
-﻿using BeatZ.Application.Common.Interfaces;
+﻿using System.Linq.Expressions;
+
+using BeatZ.Application.Common.Interfaces;
 using BeatZ.Domain.Entities;
-using System.Linq.Expressions;
+
+using Microsoft.Extensions.Logging;
 
 namespace BeatZ.Infrastructure.Services
 {
     public class ArtistsService : IArtistService
     {
         private readonly IBeatzDbContext _dbContext;
+        private readonly ILogger<ArtistsService> _logger;
 
-        public ArtistsService(IBeatzDbContext dbContext)
+        public ArtistsService(IBeatzDbContext dbContext, ILogger<ArtistsService> logger)
         {
             this._dbContext = dbContext;
+            this._logger = logger;
         }
         public async Task<int> AddArtistAsync(Artist artist)
         {
