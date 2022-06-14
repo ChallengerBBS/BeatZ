@@ -8,28 +8,25 @@ namespace BeatZ.Api.Controllers
     [Route("api/[controller]")]
     public class AlbumsController : ControllerBase
     {
-        private readonly ILogger<AlbumsController> logger;
-        private readonly IBeatzDbContext dbContext;
+        private readonly IAlbumService _albumService;
+        private readonly ITrackService _trackService;
 
-        public AlbumsController(ILogger<AlbumsController> logger, IBeatzDbContext dbContext)
+        public AlbumsController(IAlbumService albumService, ITrackService trackService)
         {
-            this.logger = logger;
-            this.dbContext = dbContext;
+            this._albumService = albumService;
+            this._trackService = trackService;
         }
 
         [HttpGet]
         public IEnumerable<Album> GetAllAlbums()
         {
-            foreach (var album in this.dbContext.Albums)
-            {
-                yield return album;
-            }
+            return this._albumService.GetAllAlbums(p => true);
         }
 
         [HttpGet("{id}")]
         public ActionResult<Album> GetAlbum(int id)
         {
-            var album = this.dbContext.Albums.FirstOrDefault(p => p.AlbumId == id);
+            var album = this._albumService.GetAlbum(p => p.AlbumId == id);
 
             if (album == null)
             {
@@ -40,7 +37,7 @@ namespace BeatZ.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Album>> AddAlbum(Album album)
+        public async Task<ActionResult<Album>> AddAlbumAsync(Album album)
         {
             if (album == null)
             {
@@ -55,7 +52,7 @@ namespace BeatZ.Api.Controllers
 
             foreach (var currentTrack in album.Tracks)
             {
-                var track = this.dbContext.Tracks.Where(x => x.TrackId == currentTrack.TrackId).FirstOrDefault();
+                var track = this._trackService.GetTrack(x => x.TrackId == currentTrack.TrackId);
                 if (track == null || (track.TrackName != currentTrack.TrackName))
                 {
                     return BadRequest("Some of the provided tracks are not found!");
@@ -65,20 +62,18 @@ namespace BeatZ.Api.Controllers
             }
 
 
-            this.dbContext.Albums.Add(albumToAdd);
-            await dbContext.SaveChangesAsync(new CancellationToken());
+            var albumId = await this._albumService.AddAlbumAsync(albumToAdd);
 
-            return CreatedAtAction(nameof(GetAlbum), new { id = albumToAdd.AlbumId }, albumToAdd);
+            return CreatedAtAction(nameof(GetAlbum), new { id = albumId });
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAlbum(int id)
         {
-            var album = this.dbContext.Albums.FirstOrDefault(p => p.AlbumId == id);
+            var album = this._albumService.GetAlbum(p => p.AlbumId == id);
             if (album != null)
             {
-                this.dbContext.Albums.Remove(album);
-                await dbContext.SaveChangesAsync(new CancellationToken());
+                await this._albumService.DeleteAlbumAsync(album.AlbumId);
                 return Accepted();
             }
 
