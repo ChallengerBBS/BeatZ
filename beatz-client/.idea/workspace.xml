@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12d7375d-537f-453d-8d7b-cc7689b66f87" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +42,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\ASUS TUF\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\221.5080.193\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Users\\ASUS TUF\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\221.5591.52\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -59,6 +59,7 @@
       <workItem from="1651479634006" duration="2940000" />
       <workItem from="1651685076365" duration="6701000" />
       <workItem from="1653487432648" duration="246000" />
+      <workItem from="1655846931752" duration="710000" />
     </task>
     <servers />
   </component>

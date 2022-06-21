@@ -70,18 +70,18 @@ namespace BeatZ.Api.Controllers
             return Ok(track);
         }
 
-        //[HttpGet("{trackId:int}/play")]
-        //public FileContentResult PlaySong(int trackId)
-        //{
-        //    var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == trackId);
+        [HttpGet("{trackId:int}/play")]
+        public FileContentResult PlaySong(int trackId)
+        {
+            var track = this._dbContext.Tracks.FirstOrDefault(p => p.TrackId == trackId);
 
-        //    if (track != null && !string.IsNullOrWhiteSpace(track.FilePath))
-        //    {
-        //        return File(System.IO.File.ReadAllBytes(track.FilePath), "audio/mpeg", Path.GetFileName(track.FilePath));
-        //    }
+            if (track != null && !string.IsNullOrWhiteSpace(track.FilePath))
+            {
+                return File(System.IO.File.ReadAllBytes(track.FilePath), "audio/mpeg", Path.GetFileName(track.FilePath));
+            }
 
-        //    return new FileContentResult(new byte[0], "audio/mpeg");
-        //}
+            return new FileContentResult(new byte[0], "audio/mpeg");
+        }
 
 
         [HttpPatch("{id:int}")]

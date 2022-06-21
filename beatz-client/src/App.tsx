@@ -1,10 +1,9 @@
 import './App.css';
 import TrackList from './Tracks/TracksList.jsx';
 
-function App() {
+export default function App() {
   return (
         <TrackList/>
   );
 }
 
-export default App;
