@@ -1,32 +1,42 @@
-import {Fragment} from "react";
-import {Button, Card} from 'react-bootstrap';
+import { useEffect, useState} from "react";
+import {Card} from 'react-bootstrap';
+import * as trackService from '../services/tracksService';
 
-import {useSelector, useDispatch} from 'react-redux'
-import {fetchTrackListDto} from '../redux/Tracks/tracksSlice'
 
-function TrackList() {
-    const tracks = useSelector((state) => state.tracks.tracksListDto);
-    const dispatch = useDispatch()
+export default function TrackList() {
+    const [tracks, setTracks] = useState([]);
+
+    useEffect(() => {
+        trackService.getAll()
+            .then((res) => setTracks(res))
+            .catch((err) => console.log(err));
+    }, [])
+
+
 
     return (
-        <Fragment>
-            <Button className="btn btn-primary" type="button" onClick={() => dispatch(fetchTrackListDto())}>Load
-                Tracks</Button>
-            {tracks && tracks.map((track) =>
-                <Card key={track.trackId}>
-                    <div>
-                        Track id: {track.trackId}
-                    </div>
-                    <div>
-                        Track name: {track.trackName}
-                    </div>
-                    <div>
-                        Artists: {track.artists.join(", ")}
-                    </div>
-                </Card>
-            )}
-        </Fragment>
+        <>
+            {tracks.length > 0 ? tracks.map(track =>
+                    <Card key={track.trackId}>
+                        <div>
+                            Track id: {track.trackId}
+                        </div>
+                        <div>
+                            Track name: {track.trackName}
+                        </div>
+                        <div>
+                            Artists: {track.artists.join(", ")}
+                        </div>
+                        <audio controls preload="none">
+                            <source
+                                src={`https://localhost:7297/api/tracks/play/${track.trackId}`}
+                                type="audio/wav"
+                            />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </Card>
+            )
+                : <p>No tracks in database!</p>}
+        </>
     );
 }
-
-export default TrackList

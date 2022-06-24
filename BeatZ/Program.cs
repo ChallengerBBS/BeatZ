@@ -25,6 +25,7 @@ builder.Services.AddAutoMapper(typeof(TrackProfile));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<TrackStreamMiddleware>();
 
 var app = builder.Build();
 
@@ -41,10 +42,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseMiddleware<TrackStreamMiddleware>();
-
-app.UseMiddleware<NotFoundMiddleware>();
-
 app.MapControllers();
+
+app.UseMiddleware<TrackStreamMiddleware>();
 
 app.Run();

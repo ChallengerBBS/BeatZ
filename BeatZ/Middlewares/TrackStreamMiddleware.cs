@@ -1,13 +1,14 @@
-﻿using BeatZ.Infrastructure.Services;
+﻿using BeatZ.Application.Common.Interfaces;
+using BeatZ.Infrastructure.Services;
 using System.Buffers;
 
 namespace BeatZ.Api.Middlewares
 {
     public class TrackStreamMiddleware : IMiddleware
     {
-        private readonly TracksService _tracksService;
+        private readonly ITrackService _tracksService;
 
-        public TrackStreamMiddleware(TracksService tracksService)
+        public TrackStreamMiddleware(ITrackService tracksService)
         {
             this._tracksService = tracksService;
         }

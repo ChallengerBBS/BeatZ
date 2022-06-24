@@ -7,8 +7,9 @@ export const tracksSlice = createSlice({
     },
     reducers: {
         fetchTrackListDto: async (state) => {
-            state.tracksListDto = await fetch("https://localhost:7297/api/tracks")
-                .then((res) => res.json());
+             await fetch("https://localhost:7297/api/tracks")
+                .then((res) => res.json())
+                .then((res)=> state.tracksListDto = res);
         },
     },
 })

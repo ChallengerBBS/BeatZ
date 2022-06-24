@@ -57,9 +57,9 @@ namespace BeatZ.Infrastructure.Services
             return trackToAdd.TrackId;
         }
 
-        public IEnumerable<Track> GetAllTracks(Expression<Func<Track, bool>> predicate)
+        public List<Track> GetAllTracks(Expression<Func<Track, bool>> predicate)
         {
-            return this._dbContext.Tracks.Where(predicate);
+            return this._dbContext.Tracks.Where(predicate).ToList();
         }
 
         public Track GetTrack(Expression<Func<Track, bool>> predicate)
@@ -77,12 +77,13 @@ namespace BeatZ.Infrastructure.Services
             }
         }
 
-        public IEnumerable<string> GetTrackArtistsNames(int trackId)
+        public List<string> GetTrackArtistsNames(int trackId)
         {
             return this._dbContext.Tracks
                     .Where(c => c.TrackId == trackId)
                     .SelectMany(c => c.Artists)
-                    .Select(c => c.ArtistName);
+                    .Select(c => c.ArtistName)
+                    .ToList();
         }
     }
 }
