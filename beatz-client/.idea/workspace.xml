@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12d7375d-537f-453d-8d7b-cc7689b66f87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/services/requester.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/tracksService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ.Application/Common/Interfaces/ITrackService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ.Application/Common/Interfaces/ITrackService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ.Infrastructure/Services/TracksService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ.Infrastructure/Services/TracksService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Controllers/TracksController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BeatZ/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BeatZ/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Beatz.Persistence/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Beatz.Persistence/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tracks/TrackPlayer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tracks/TracksList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tracks/TracksList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/Tracks/tracksSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Tracks/tracksSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
-    </list>
+    <list default="true" id="12d7375d-537f-453d-8d7b-cc7689b66f87" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -1,5 +1,6 @@
 ﻿using BeatZ.Application.Common.Interfaces;
 using BeatZ.Domain.Entities;
+using BeatZ.Domain.Entities.Auth;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeatZ.Persistence
@@ -16,6 +17,9 @@ namespace BeatZ.Persistence
         }
 
         public DbSet<Album> Albums { get; set; } = null!;
+
+        public DbSet<UserModel> Users { get; set; } = null!;
+
         public DbSet<Artist> Artists { get; set; } = null!;
         public DbSet<Track> Tracks { get; set; } = null!;
     }
