@@ -13,7 +13,7 @@ namespace BeatZ.Domain.Entities.Auth
             new UserModel() { 
                 Username = "sevdovasilev95",
                 EmailAddress = "sevdo@abv.bg",
-                Password = "qwebsrty",
+                Password = "qwebsrty123321",
                 GivenName = "Sevdo",
                 Surname = "Vasilev",
                 Role = "Administrator"
